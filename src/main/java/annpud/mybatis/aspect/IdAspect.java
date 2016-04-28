@@ -1,5 +1,6 @@
-package annpud.mybatis;
+package annpud.mybatis.aspect;
 
+import annpud.mybatis.Uuid;
 import annpud.mybatis.entity.PkField;
 import org.aspectj.lang.JoinPoint;
 import org.slf4j.Logger;

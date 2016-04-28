@@ -48,14 +48,16 @@ public List<T> selectAll();
 ### 3.1. 泛型增删改查
 
 在配置文件classpath:mybatis.xml中添加plugin。
-
+```xml
 <configuration>
     <plugins>
-        <plugin interceptor="annpud.mybatis.plugin.MapperPlugin"></plugin>
+        <plugin interceptor="annpud.mybatis.MapperPlugin"></plugin>
     </plugins>
 </configuration>
-mapper接口继承annpud.mybatis.mapper.Mapper。
+```
 
+```java
+//mapper接口继承annpud.mybatis.mapper.Mapper
 package annpud.demo.mapper;
 
 import annpud.demo.tb.DemoTb;
@@ -64,13 +66,17 @@ import annpud.mybatis.mapper.Mapper;
 public interface DemoTbMapper extends Mapper<DemoTb> {
 
 }
-接口DemoTbMapper的对象，已经可以使用Mapper提供的增删改查方法。
-
-DemoTb dtb = demoMapper.select(dm.getId());
-2、使用自动生成id和noid的值
+//接口DemoTbMapper的对象，已经可以使用Mapper提供的增删改查方法。
+//查询
+DemoTb selectDB = demoMapper.select("some_id");
+//插入
+DemoTb saveDB = new DemoTb();
+demoMapper.insertNotNull(saveDB);
+```
+### 3.2.使用自动生成id和noid的值
 
 在配置文件spring-mybatis.xml中添加spring aop配置。
-
+```xml
 <beans>
     <!-- mybatis mapper 层的aop配置 -->
     <aop:config>
@@ -81,6 +87,7 @@ DemoTb dtb = demoMapper.select(dm.getId());
         </aop:aspect>
     </aop:config>
     <!-- 生成数据库主键id值的aop bean -->
-    <bean id="idAspect" class="com.gxws.tool.mybatis.aspect.IdAspect" />
+    <bean id="idAspect" class="annpud.mybatis.aspect.IdAspect" />
 </beans>
+```
 在包annpud.demo.mapper以内所有类，方法名以insert开始的方法，在执行时会自动添加id的值。
