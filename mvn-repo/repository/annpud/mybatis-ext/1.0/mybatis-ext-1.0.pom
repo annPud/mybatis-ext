@@ -17,8 +17,8 @@
 
     <distributionManagement>
         <repository>
-            <id>mvn-repo</id>
-            <name>mvn-repo</name>
+            <id>mvn-repo-mybatis-ext</id>
+            <name>mvn-repo-mybatis-ext</name>
             <url>file:mvn-repo/repository</url>
         </repository>
     </distributionManagement>
